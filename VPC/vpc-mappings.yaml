@@ -83,7 +83,7 @@ Resources:
       VpcId: !Ref VPC
       Tags:
         - Key: Name
-          Value: !FindInMap [ VPC, VPCConigure, Name ]
+          Value: !FindInMap [ VPC, VPCConfigure, Name ]
 
   DefaultRoute:
     Type: AWS::EC2::Route
