@@ -67,4 +67,4 @@ Resources:
 
 Outputs:
   PipelineUrl:
-    Value: !Sub https://console.aws.amazon.com/iam/home?region={AWS::Region}#/encryptionKeys/{AWS::Region}/{EncryptKMS}
+    Value: !Sub https://console.aws.amazon.com/iam/home?region=${AWS::Region}#/encryptionKeys/${AWS::Region}/${EncryptKMS}
