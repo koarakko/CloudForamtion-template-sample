@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Create EC2 instance on amazon linux that install selinux.
+
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+  Ec2SshKey:
+    Type: String
+    Default: eb-test-dev2
+
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-9c9443e3
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref Ec2SshKey
+      UserData:
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            yum update -y aws-cfn-bootstrap
+            yum install -y selinux-policy-targeted policycoreutils-python setools-console
+            sed -i -e 's/selinux=0/security=selinux selinux=1/g' /boot/grub/menu.lst
+            dracut --force
+            touch /.autorelabel
+            shutdown -r now
+      Tags:
+        - Key: Name
+          Value: !Ref AWS::StackName
