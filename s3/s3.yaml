@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  This template create s3 bucket to save deploy files for application.
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: testbucket
+
+Resources:
+  Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${AWS::AccountId}-${BucketName}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
+Outputs:
+  S3Url:
+    Value: !Sub https://s3.console.aws.amazon.com/s3/buckets/${BucketName}/?region=${AWS::Region}&tab=overview
