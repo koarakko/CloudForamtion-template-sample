@@ -7,7 +7,6 @@ Parameters:
     Type: String
     Default: sample-kms 
 
-
 Resources:
   EncryptKMS:
     Type: AWS::KMS::Key

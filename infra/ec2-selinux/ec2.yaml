@@ -1,22 +1,24 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: >
   Create EC2 instance on amazon linux that install selinux.
-
-
 Parameters:
   InstanceType:
     Type: String
     Default: t2.micro
+  ImageId:
+    Type: String
+    Default: ami-9c9443e3
+  InstanceName:
+    Type: String
+    Default: CFn-Test-Server
   Ec2SshKey:
     Type: String
-    Default: eb-test-dev2
-
 
 Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-9c9443e3
+      ImageId: !Ref ImageId
       InstanceType: !Ref InstanceType
       KeyName: !Ref Ec2SshKey
       UserData:
@@ -31,4 +33,4 @@ Resources:
             shutdown -r now
       Tags:
         - Key: Name
-          Value: !Ref AWS::StackName
+          Value: !Ref InstanceName
