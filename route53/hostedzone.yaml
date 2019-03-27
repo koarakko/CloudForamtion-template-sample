@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  create route53 Hosted Zone.
+Parameters:
+  DomainName:
+    Type: String
+    Default: test.local
+  VpcId:
+    Type: String
+  VpcRegion:
+    Type: String
+    Default: ap-northeast-1
+
+Resources:
+  HostedZone:
+    Type: "AWS::Route53::HostedZone"
+    Properties:
+      Name: !Ref DomainName
+      VPCs:
+        -
+          VPCId: !Ref VpcId
+          VPCRegion: !Ref VpcRegion
