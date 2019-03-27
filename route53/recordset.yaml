@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  create route53 Record set.
+Parameters:
+  HostedZoneName:
+    Type: String
+    Default: hoge.local.
+  RecordName:
+    Type: String
+    Default: test3.hoge.local.
+  RecordType:
+    Type: String
+    Default: A
+  ResourceRecords:
+    Type: String
+  TTL:
+    Type: String
+    Default: 600
+
+Resources:
+  DnsRecordSet:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Comment: testtesttestet
+      HostedZoneName: !Ref HostedZoneName
+      Name: !Ref RecordName
+      Type: !Ref RecordType
+      ResourceRecords:
+        - !Ref ResourceRecords
+      TTL: !Ref TTL
+
+
